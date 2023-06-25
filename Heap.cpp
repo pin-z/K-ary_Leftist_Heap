@@ -176,7 +176,7 @@ class Heap {
         else{
             while (todelete->isLeaf())
             {
-                Heap* LeftChild = todelete->child.gethead();
+                Heap* LeftChild = todelete->child.gethead()->retrieve();
                 Swap(todelete->data, LeftChild->data);
                 todelete = LeftChild;
             }
@@ -188,6 +188,15 @@ class Heap {
 
      
         
+    }
+
+    T findMax(){
+        if(isRoot()){
+            return this->data;
+        }
+        else{
+            return getParent()->findMax();
+        }
     }
     
 
@@ -484,6 +493,7 @@ int main(){
     test.insert(89);
     Heap<int> A;
     cout << "Size: " << test.Size() << endl;
+    cout << "Max: " << test.findMax() << endl;
     test.Breath_First_Traversal();
    
     return 0;
